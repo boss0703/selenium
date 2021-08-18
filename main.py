@@ -55,7 +55,21 @@ try:
     driver.get('https://elearning-site.herokuapp.com/top/manaby')
     driver.find_element_by_id('user_usernumber').send_keys(MANABY_ID)
     driver.find_element_by_id('user_password').send_keys(MANABY_PASSWORD)
-    driver.find_element_by_name("commit").click()
+    driver.find_element_by_name('commit').click()
+
+    print('open atgp site and login...')
+    driver.execute_script('window.open()')
+    window = driver.window_handles
+    driver.switch_to.window(window[5])
+    driver.get('https://www.atgp.jp/login')
+    driver.find_element_by_name('email').send_keys(EMAIL)
+    driver.find_element_by_name('password').send_keys(PASSWORD)
+    driver.find_element_by_css_selector('input.c-button.c-button--blue').click()
+    driver.get('https://www.atgp.jp/search/top/search_result?job_categories=b01001610000005000'
+               '&job_types=b01001620000022000%2Cb01001620000023000%2Cb01001620000024000%2Cb010'
+               '01620000025000%2Cb01001620000026000'
+               '&prefectures=13')
+
 
     # Team Hack画面に移動
     driver.switch_to.window(window[0])
