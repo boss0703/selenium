@@ -86,7 +86,6 @@ try:
                '01620000025000%2Cb01001620000026000'
                '&prefectures=13')
 
-
     # Team Hack画面に移動
     driver.switch_to.window(window[0])
     print('completed successfully all page open!!')
