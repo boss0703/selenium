@@ -1,8 +1,24 @@
+import os.path
+import sys
 import time
 
 from selenium import webdriver
 
 from local_settings import DRIVER_PATH, PASSWORD, EMAIL, MANABY_ID, MANABY_PASSWORD, REDMINE_ID
+
+
+def resource_path():
+    try:
+        # exe実行時
+        base_path = sys._MEIPASS
+        print('has been executed .exe')
+    except Exception:
+        # python 実行時
+        base_path = os.path.dirname(__file__)
+        print('has been executed .py')
+
+    return os.path.join(base_path, DRIVER_PATH)
+
 
 try:
     options = webdriver.ChromeOptions()
@@ -11,7 +27,7 @@ try:
     options.add_experimental_option("detach", True)
 
     print('connecting to remote browser...')
-    driver = webdriver.Chrome(executable_path=DRIVER_PATH, options=options)
+    driver = webdriver.Chrome(executable_path=resource_path(), options=options)
     driver.set_window_position(0, -1000)
     driver.maximize_window()
     driver.implicitly_wait(10)
@@ -77,5 +93,3 @@ try:
 except Exception as e:
     print(e)
     time.sleep(30)
-finally:
-    print('finish')
